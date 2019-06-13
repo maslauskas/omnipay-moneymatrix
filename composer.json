@@ -1,0 +1,35 @@
+{
+    "name": "maslauskas/omnipay-moneymatrix",
+    "description": "MoneyMatrix driver for the Omnipay PHP payment processing library",
+    "keywords": [
+        "gateway",
+        "merchant",
+        "omnipay",
+        "pay",
+        "payment",
+        "moneymatrix"
+    ],
+    "type": "library",
+    "homepage": "https://github.com/maslauskas/omnipay-moneymatrix",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tadas Maslauskas",
+            "email": "maslauskas.t@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Omnipay\\MoneyMatrix\\" : "src/"
+        }
+    },
+    "require": {
+        "omnipay/common": "^3"
+    },
+    "require-dev": {
+        "omnipay/tests": "^3"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    }
+}
