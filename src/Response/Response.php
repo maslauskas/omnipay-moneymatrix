@@ -3,7 +3,6 @@
 namespace Omnipay\MoneyMatrix\Response;
 
 use Omnipay\Common\Message\AbstractResponse;
-use Omnipay\Common\Message\RequestInterface;
 use Omnipay\MoneyMatrix\Common\Signature;
 use Omnipay\MoneyMatrix\Message\AbstractRequest;
 
