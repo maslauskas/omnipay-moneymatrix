@@ -48,6 +48,24 @@ class Gateway extends AbstractGateway
     }
 
     /**
+     * @return string
+     */
+    public function getMerchantKey()
+    {
+        return $this->getParameter('MerchantKey');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return Gateway
+     */
+    public function setMerchantKey(string $value)
+    {
+        return $this->setParameter('MerchantKey', $value);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function initDeposit(array $options = [])
