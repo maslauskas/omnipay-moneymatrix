@@ -19,4 +19,15 @@ class DepositResponse extends Response
     {
         return $this->data['CashierUrl'] ?? null;
     }
+
+    /**
+     * @return array
+     */
+    public function getSignatureParams(): array
+    {
+        return [
+            'CashierUrl' => $this->getCashierUrl(),
+            'ResponseCode' => $this->getResponseCode(),
+        ];
+    }
 }

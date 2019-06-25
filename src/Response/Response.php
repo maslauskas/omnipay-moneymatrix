@@ -4,9 +4,15 @@ namespace Omnipay\MoneyMatrix\Response;
 
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RequestInterface;
+use Omnipay\MoneyMatrix\Common\Signature;
+use Omnipay\MoneyMatrix\Message\AbstractRequest;
 
 abstract class Response extends AbstractResponse
 {
+    /**
+     * @var AbstractRequest
+     */
+    protected $request;
     /**
      * @var array
      */
@@ -15,11 +21,11 @@ abstract class Response extends AbstractResponse
     /**
      * Response constructor.
      *
-     * @param RequestInterface $request
+     * @param AbstractRequest $request
      * @param $data
      * @param array $headers
      */
-    public function __construct(RequestInterface $request, $data, array $headers = [])
+    public function __construct(AbstractRequest $request, $data, array $headers = [])
     {
         parent::__construct($request, json_decode($data, true));
         $this->headers = $headers;
@@ -38,8 +44,12 @@ abstract class Response extends AbstractResponse
      */
     public function isValid(): bool
     {
-        return true;
+        $signature = new Signature($this->request->getMerchantId(), $this->request->getMerchantKey());
+
+        return $signature->isValid($this->getSignature(), $this->getSignatureParams());
     }
+
+    public abstract function getSignatureParams(): array;
 
     /**
      * @return int

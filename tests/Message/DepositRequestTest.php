@@ -11,10 +11,23 @@ class DepositRequestTest extends TestCase
      */
     private $request;
 
+    /**
+     * @var int
+     */
+    private $merchantId;
+
+    /**
+     * @var string
+     */
+    private $merchantKey;
+
     protected function setUp()
     {
         parent::setUp();
         $this->request = new DepositRequest($this->getHttpClient(), $this->getHttpRequest());
+
+        $this->merchantId = 1234;
+        $this->merchantKey = "SOME_RANDOM_STRING";
     }
 
     public function testAddSignatureToData()
@@ -52,9 +65,25 @@ class DepositRequestTest extends TestCase
         $response = $this->request->send();
 
         $this->assertTrue($response->isSuccessful());
+        $this->assertTrue($response->isValid(), 'Signature should be valid.');
         $this->assertFalse($response->isRedirect());
-        $this->assertSame('aee933d28d0311e9b1c33a3031346235000006', $response->getTransactionCode());
+        $this->assertSame('c5df39d6974e11e9b1c33a3031346235001967', $response->getTransactionCode());
         $this->assertNotNull($response->getCashierUrl());
+    }
+
+    public function testSendSuccess_InvalidSignature()
+    {
+        $this->merchantKey = uniqid();
+
+        $this->setMockHttpResponse('DepositSuccess.txt');
+
+        $this->request->initialize($this->getValidParameters());
+
+        /** @var DepositResponse $response */
+        $response = $this->request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isValid(), 'Signature should be invalid.');
     }
 
     public function testSendFail_ChecksumInvalid()
@@ -73,9 +102,8 @@ class DepositRequestTest extends TestCase
     private function getValidParameters()
     {
         return [
-            "MerchantId" => 1234,
-            "MerchantKey" => uniqid(),
-
+            "MerchantId" => $this->merchantId,
+            "MerchantKey" => $this->merchantKey,
             "CustomerId" => 123,
             "CountryCode" => "GB",
             "MerchantReference" => uniqid(),
