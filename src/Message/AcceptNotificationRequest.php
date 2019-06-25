@@ -29,4 +29,12 @@ class AcceptNotificationRequest extends AbstractRequest
     {
         // TODO: Implement sendData() method.
     }
+
+    /**
+     * @return array
+     */
+    public function getSignatureData(): array
+    {
+        // TODO: Implement getSignatureData() method.
+    }
 }

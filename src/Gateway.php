@@ -4,7 +4,7 @@ namespace Omnipay\MoneyMatrix;
 
 use Omnipay\Common\AbstractGateway;
 use Omnipay\MoneyMatrix\Message\AcceptNotificationRequest;
-use Omnipay\MoneyMatrix\Message\InitDepositRequest;
+use Omnipay\MoneyMatrix\Message\DepositRequest;
 
 class Gateway extends AbstractGateway
 {
@@ -52,7 +52,7 @@ class Gateway extends AbstractGateway
      */
     public function initDeposit(array $options = [])
     {
-        return $this->createRequest(InitDepositRequest::class, $options);
+        return $this->createRequest(DepositRequest::class, $options);
     }
 
     /**

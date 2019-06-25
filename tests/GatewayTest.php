@@ -33,7 +33,7 @@ class GatewayTest extends GatewayTestCase
             'amount' => 10.5
         ]);
 
-        $this->assertInstanceOf('\Omnipay\MoneyMatrix\Message\InitDepositRequest', $request);
+        $this->assertInstanceOf('\Omnipay\MoneyMatrix\Message\DepositRequest', $request);
         $this->assertSame(1050, $request->getAmountInteger());
     }
 

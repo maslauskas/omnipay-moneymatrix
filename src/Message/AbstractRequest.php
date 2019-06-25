@@ -19,11 +19,35 @@ abstract class AbstractRequest extends OmnipayAbstractRequest
     /**
      * Set the merchant ID.
      *
-     * @param int $merchantId
+     * @param int $value
+     *
      * @return $this
      */
-    public function setMerchantId(int $merchantId)
+    public function setMerchantId(int $value)
     {
-        return $this->setParameter('MerchantId', $merchantId);
+        return $this->setParameter('MerchantId', $value);
     }
+
+    /**
+     * @return string
+     */
+    public function getMerchantKey()
+    {
+        return $this->getParameter('MerchantKey');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return AbstractRequest
+     */
+    public function setMerchantKey(string $value)
+    {
+        return $this->setParameter('MerchantKey', $value);
+    }
+
+    /**
+     * @return array
+     */
+    public abstract function getSignatureData(): array;
 }
