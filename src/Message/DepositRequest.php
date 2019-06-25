@@ -2,25 +2,45 @@
 
 namespace Omnipay\MoneyMatrix\Message;
 
+use Omnipay\Common\Exception\InvalidRequestException;
 use Omnipay\Common\Message\ResponseInterface;
 use Omnipay\MoneyMatrix\Common\Signature;
+use Omnipay\MoneyMatrix\Parameters\DepositParameters;
 
 class DepositRequest extends AbstractRequest
 {
+    /** @var DepositParameters */
+    protected $parameters;
+
+    /**
+     * @param array $parameters
+     *
+     * @return $this|AbstractRequest
+     */
+    public function initialize(array $parameters = [])
+    {
+        parent::initialize($parameters);
+
+        $this->parameters = new DepositParameters($parameters);
+
+        return $this;
+    }
+
     /**
      * Get the raw data array for this message. The format of this varies from gateway to
      * gateway, but will usually be either an associative array, or a SimpleXMLElement.
      *
      * @return mixed
+     * @throws InvalidRequestException
      */
     public function getData()
     {
+        $this->validate(...$this->parameters->getRequiredParameters());
+
         $signature = new Signature($this->getMerchantId(), $this->getMerchantKey());
 
-        $data = [
-            'MerchantId' => $this->getMerchantId(),
-            'Signature' => $signature->generate($this->getSignatureData())
-        ];
+        $data = $this->parameters->all();
+        $data['Signature'] = $signature->generate($this->getSignatureData());
 
         return $data;
     }
@@ -42,44 +62,6 @@ class DepositRequest extends AbstractRequest
      */
     public function getSignatureData(): array
     {
-        return [
-            'MerchantReference' => $this->getMerchantReference(),
-            'PaymentMethod' => $this->getPaymentMethod(),
-            'CustomerId' => $this->getCustomerId(),
-            'Amount' => $this->getAmountString(),
-            'Currency' => $this->getCurrency(),
-        ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getMerchantReference()
-    {
-        return $this->getParameter('MerchantReference');
-    }
-
-    /**
-     * @return string
-     */
-    public function getPaymentMethod()
-    {
-        return $this->getParameter('PaymentMethod');
-    }
-
-    /**
-     * @return string
-     */
-    public function getCustomerId()
-    {
-        return $this->getParameter('CustomerId');
-    }
-
-    /**
-     * @return string
-     */
-    public function getAmountString()
-    {
-        return number_format($this->getParameter('Amount'), 2);
+        return $this->parameters->getSignatureData();
     }
 }
