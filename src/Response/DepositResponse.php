@@ -5,18 +5,18 @@ namespace Omnipay\MoneyMatrix\Response;
 class DepositResponse extends Response
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTransactionCode(): string
+    public function getTransactionCode(): ?string
     {
-        return $this->data['TransactionCode'];
+        return $this->data['TransactionCode'] ?? null;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCashierUrl(): string
+    public function getCashierUrl(): ?string
     {
-        return $this->data['CashierUrl'];
+        return $this->data['CashierUrl'] ?? null;
     }
 }

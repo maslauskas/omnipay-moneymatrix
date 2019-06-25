@@ -57,6 +57,19 @@ class DepositRequestTest extends TestCase
         $this->assertNotNull($response->getCashierUrl());
     }
 
+    public function testSendFail_ChecksumInvalid()
+    {
+        $this->setMockHttpResponse('ChecksumInvalid.txt');
+        $this->request->initialize($this->getValidParameters());
+
+        /** @var DepositResponse $response */
+        $response = $this->request->send();
+
+        $this->assertFalse($response->isSuccessful());
+        $this->assertNull($response->getTransactionCode());
+        $this->assertNull($response->getCashierUrl());
+    }
+
     private function getValidParameters()
     {
         return [
