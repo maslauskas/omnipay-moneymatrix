@@ -2,17 +2,21 @@
 
 namespace Omnipay\MoneyMatrix\Response;
 
-use Omnipay\Common\Message\AbstractResponse;
-
-class DepositResponse extends AbstractResponse
+class DepositResponse extends Response
 {
     /**
-     * Is the response successful?
-     *
-     * @return boolean
+     * @return string
      */
-    public function isSuccessful()
+    public function getTransactionCode(): string
     {
-        return true;
+        return $this->data['TransactionCode'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getCashierUrl(): string
+    {
+        return $this->data['CashierUrl'];
     }
 }

@@ -3,9 +3,10 @@
 namespace Omnipay\MoneyMatrix\Message;
 
 use Omnipay\Common\Exception\InvalidRequestException;
-use Omnipay\Common\Message\ResponseInterface;
+use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\MoneyMatrix\Common\Signature;
 use Omnipay\MoneyMatrix\Parameters\DepositParameters;
+use Omnipay\MoneyMatrix\Response\DepositResponse;
 
 class DepositRequest extends AbstractRequest
 {
@@ -46,22 +47,29 @@ class DepositRequest extends AbstractRequest
     }
 
     /**
-     * Send the request with specified data
-     *
-     * @param mixed $data The data to send
-     *
-     * @return ResponseInterface
-     */
-    public function sendData($data)
-    {
-        // TODO: Implement sendData() method.
-    }
-
-    /**
      * @return array
      */
     public function getSignatureData(): array
     {
         return $this->parameters->getSignatureData();
+    }
+
+    /**
+     * @param $data
+     * @param array $headers
+     *
+     * @return DepositResponse
+     */
+    protected function createResponse($data, array $headers = []): AbstractResponse
+    {
+        return new DepositResponse($this, $data, $headers);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getEndpoint(): string
+    {
+        return $this->getBaseEndpoint() . '/InitDeposit';
     }
 }

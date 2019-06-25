@@ -2,7 +2,7 @@
 
 namespace Omnipay\MoneyMatrix\Message;
 
-use Omnipay\Common\Message\ResponseInterface;
+use Omnipay\Common\Message\AbstractResponse;
 
 class AcceptNotificationRequest extends AbstractRequest
 {
@@ -19,22 +19,29 @@ class AcceptNotificationRequest extends AbstractRequest
     }
 
     /**
-     * Send the request with specified data
-     *
-     * @param mixed $data The data to send
-     *
-     * @return ResponseInterface
-     */
-    public function sendData($data)
-    {
-        // TODO: Implement sendData() method.
-    }
-
-    /**
      * @return array
      */
     public function getSignatureData(): array
     {
         // TODO: Implement getSignatureData() method.
+    }
+
+    /**
+     * @param $data
+     * @param array $headers
+     *
+     * @return AbstractResponse
+     */
+    protected function createResponse($data, array $headers = []): AbstractResponse
+    {
+        // TODO: Implement createResponse() method.
+    }
+
+    /**
+     * @return string
+     */
+    protected function getEndpoint(): string
+    {
+        // TODO: Implement getEndpoint() method.
     }
 }

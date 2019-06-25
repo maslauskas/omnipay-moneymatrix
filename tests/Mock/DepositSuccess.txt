@@ -1,0 +1,12 @@
+HTTP/1.1 200 OK
+
+{
+  "TransactionCode": "aee933d28d0311e9b1c33a3031346235000006",
+  "CashierUrl": "https://cashier-stage.moneymatrix.com/Cashier/Deposit?nonce=af30ea908d0311e9b1c33a3031346235000006",
+  "Checksum": "cCCINq0FrDpl8qHALq5RqtF+8LOmnPMHvr8kmfCnYw21KwVYQbYHSnYNM+O9UKl/ic4vtidB/iIE4viy8gA8Ng==",
+  "Signature": "lTS7HTv4dn8L0q8egN9mqW2cL760AMo/+TXuU9c3j0SJ6zczpyJ89H1lCQInrvPhXHrqCgeH/RAu9EuhE1VUvg==",
+  "ResponseMessage": "Success",
+  "RequestId": "9077c2d173f247cebfc6ef647fd96317",
+  "ResponseDisplayText": "Success",
+  "ResponseCode": 1
+}

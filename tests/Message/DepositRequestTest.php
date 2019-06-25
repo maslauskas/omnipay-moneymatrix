@@ -43,6 +43,20 @@ class DepositRequestTest extends TestCase
         $this->request->send();
     }
 
+    public function testSendSuccess()
+    {
+        $this->setMockHttpResponse('DepositSuccess.txt');
+        $this->request->initialize($this->getValidParameters());
+
+        /** @var DepositResponse $response */
+        $response = $this->request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isRedirect());
+        $this->assertSame('aee933d28d0311e9b1c33a3031346235000006', $response->getTransactionCode());
+        $this->assertNotNull($response->getCashierUrl());
+    }
+
     private function getValidParameters()
     {
         return [
