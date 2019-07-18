@@ -37,6 +37,16 @@ class GatewayTest extends GatewayTestCase
         $this->assertSame(1050, $request->getAmountInteger());
     }
 
+    public function testInitWithdrawal()
+    {
+        $request = $this->gateway->initWithdrawal([
+            'amount' => 15.5
+        ]);
+
+        $this->assertInstanceOf('\Omnipay\MoneyMatrix\Message\WithdrawalRequest', $request);
+        $this->assertSame(1550, $request->getAmountInteger());
+    }
+
     public function testAcceptNotification()
     {
         $this->assertTrue($this->gateway->supportsAcceptNotification());

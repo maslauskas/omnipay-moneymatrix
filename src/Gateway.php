@@ -5,6 +5,7 @@ namespace Omnipay\MoneyMatrix;
 use Omnipay\Common\AbstractGateway;
 use Omnipay\MoneyMatrix\Message\AcceptNotificationRequest;
 use Omnipay\MoneyMatrix\Message\DepositRequest;
+use Omnipay\MoneyMatrix\Message\WithdrawalRequest;
 
 class Gateway extends AbstractGateway
 {
@@ -71,6 +72,14 @@ class Gateway extends AbstractGateway
     public function initDeposit(array $options = [])
     {
         return $this->createRequest(DepositRequest::class, $options);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function initWithdrawal(array $options = [])
+    {
+        return $this->createRequest(WithdrawalRequest::class, $options);
     }
 
     /**

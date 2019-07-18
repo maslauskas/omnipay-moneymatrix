@@ -1,0 +1,12 @@
+HTTP/1.1 200 OK
+
+{
+  "TransactionCode": "bb170398a95511e990093a3031346235000006",
+  "CashierUrl": "https://cashier-stage.moneymatrix.com/Cashier/Withdraw?nonce=bb4d02c5a95511e990093a3031346235000006",
+  "Checksum": "Qsxn80aBeh7XM/pMIDRBPXnXHEAmanMo5Ym0511cNPgnNCmpOMnyFp5Ql8Vu8qXq08F/Cf9XY0/fftfaTIF/tw==",
+  "Signature": "v7jAkcMgwBZlepK5WjNz5ekRXgAMuGDxF6I0+Iwsxa++xd/lwDHxWJIM6Znxb+mjOXg66rQKDTBPDshqLgCs0Q==",
+  "ResponseMessage": "Success",
+  "RequestId": "b37b39d4a36a449e8229660b4b368aaf",
+  "ResponseDisplayText": "Success",
+  "ResponseCode": 1
+}
